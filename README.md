@@ -1,3 +1,9 @@
+# How to run
+
+Run `yarn install`
+
+Run `yarn start`
+
 # Where did I put my stuff?
 
 ## Reading directories
