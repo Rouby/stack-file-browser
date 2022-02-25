@@ -24,7 +24,7 @@ jobs:
         run: |
           yarn install
         env:
-          YARN_CHECKSUM_BEHAVIOR: ignore
+          YARN_CHECKSUM_BEHAVIOR: update
 
       - name: yarn test
         env:
