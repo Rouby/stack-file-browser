@@ -4,6 +4,10 @@ Run `yarn install`
 
 Run `yarn start`
 
+# How to test
+
+I wanted to add cypress component tests to test my components. I couldnt get the webpack config to "just work" with cypress and settled on using vite-dev-server which works for this simple use-case.
+
 # Where did I put my stuff?
 
 ## Reading directories
