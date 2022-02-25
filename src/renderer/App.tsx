@@ -1,10 +1,60 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import fileIcon from './file.png';
 import folderIcon from './folder.png';
 import useDirectory from './useDirectory';
 
 export default function App() {
+  useEffect(() => {
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+
+    function handler(event: KeyboardEvent) {
+      switch (event.key) {
+        case 'ArrowDown':
+          if (document.activeElement?.getAttribute('data-file')) {
+            focusNode(document.activeElement.nextSibling);
+          } else {
+            focusNode(document.querySelector('[data-file]'));
+          }
+          event.preventDefault();
+          break;
+        case 'ArrowUp':
+          if (document.activeElement?.getAttribute('data-file')) {
+            focusNode(document.activeElement.previousSibling);
+          } else {
+            focusNode(document.querySelector('[data-file]'));
+          }
+          event.preventDefault();
+          break;
+        case 'ArrowRight':
+          if (document.activeElement?.getAttribute('data-file')) {
+            focusNode(
+              document.activeElement.parentElement?.nextSibling?.firstChild
+            );
+          }
+          event.preventDefault();
+          break;
+        case 'ArrowLeft':
+          if (document.activeElement?.getAttribute('data-file')) {
+            focusNode(
+              document.activeElement.parentElement?.previousSibling?.firstChild
+            );
+          }
+          event.preventDefault();
+          break;
+        default:
+          break;
+      }
+    }
+
+    function focusNode(node: Node | null | undefined) {
+      if (node instanceof HTMLElement) {
+        node.focus();
+      }
+    }
+  }, []);
+
   return (
     <div
       style={{
@@ -65,6 +115,7 @@ function FileList({
 
             textAlign: 'left',
           }}
+          data-file="yes"
         >
           <span>
             <img
